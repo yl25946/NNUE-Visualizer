@@ -101,6 +101,7 @@ class NNUE:
 
         fig.tight_layout()
         fig.savefig(f'{number}.png', pad_inches=0, transparent=True)
+        plt.close()
 
     def full_evaluate(self, board: chess.Board):
         output_bucket = self.get_output_bucket(board)
@@ -125,7 +126,7 @@ class NNUE:
                      + np.sum(accumulatorWhite.clip(0, 181).astype(np.int32) ** 2 * self.outputWeights[chess.BLACK][self.hidden_size][output_bucket]))
 
         value = (
-            total // 181 + self.outputBias[output_bucket]) * 400 // (181 * 64)
+            total // 255 + self.outputBias[output_bucket]) * 400 // (255 * 64)
 
         return value
 
