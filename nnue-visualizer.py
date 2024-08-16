@@ -58,7 +58,7 @@ class NNUE:
             intensity[chess.square_rank(square)][chess.square_file(
                 square)] = self.ft[self.feature_index(piece, square, False)][neuron_index]
 
-        self.display(intensity)
+        self.display(intensity, neuron_index)
 
     # visualizes the weights of a specific neuron for a specific piece type and color
     def visualize2(self, piecetype, color, neuron_index: int = 0):
@@ -89,7 +89,7 @@ class NNUE:
 
         self.display(intensity)
 
-    def display(self, intensity, number: int = -1):
+    def display(self, intensity, number: int = 0):
 
         fig, ax = plt.subplots(figsize=(2, 2))
         ax.imshow(intensity, cmap='magma', interpolation='none')
@@ -137,9 +137,8 @@ network = NNUE("2048-8.bin")
 # network.visualize2(chess.ROOK, chess.WHITE, 109)
 # network.visualize2(chess.ROOK, chess.WHITE, 153)
 for i in range(0, 2048):
-    # network.visualize1(chess.Board(
-    #     "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - 0 1"), i)
-    network.visualize2(chess.PAWN, chess.WHITE, i)
+    network.visualize1(chess.Board(chess.STARTING_BOARD_FEN), i)
+    # network.visualize2(chess.PAWN, chess.WHITE, i)
     # network.visualize3(chess.Board())
     pass
 
