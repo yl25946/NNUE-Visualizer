@@ -1,2 +1,2 @@
-# NNUE-Visualizer
-Used to visualize the NNUE for Spaghet
+# NNUE Visualizer
+thanks shawn
