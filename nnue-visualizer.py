@@ -100,8 +100,11 @@ class NNUE:
         ax.set_xticks([])
         ax.set_yticks([])
 
-        ax.set_xlabel(x_label, fontsize=font_size)
-        fig.tight_layout()
+        # compacts the entire diagram
+        ax.axis('off')
+
+        # ax.set_xlabel(x_label, fontsize=font_size)
+        # fig.tight_layout()
 
     def full_evaluate(self, board: chess.Board):
         output_bucket = self.get_output_bucket(board)
@@ -153,18 +156,19 @@ network = NNUE("2048-8.bin")
 
 
 # how many neurons wide we want the visualization to be
-x = 8
+x = 32
 # how many neurons tall we want the visualization to be
-y = 8
+y = 32
 # how big you want the font to be
-font_size = 6
+font_size = 0
 
 fig, ax = plt.subplots(x, y)
+fig.patch.set_facecolor('black')
 
 for i in range(x):
     for j in range(y):
-        neuron = i * x + j
-        network.visualize2(chess.PAWN, chess.WHITE,
+        neuron = i + j * x
+        network.visualize2(chess.BISHOP, chess.WHITE,
                            ax[i, j], font_size, neuron)
 
 fig.savefig('tmp.png',
